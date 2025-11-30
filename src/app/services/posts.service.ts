@@ -14,7 +14,7 @@ export class PostsService {
 
     getPosts(): Observable<Post[]> {
         return this.http.get<Post[]>(this.API_URL).pipe(
-            retry(2), // Retry failed requests up to 2 times
+            retry(2), 
             catchError(this.handleError)
         );
     }
@@ -23,10 +23,9 @@ export class PostsService {
         let errorMessage = 'An error occurred while fetching posts.';
 
         if (error.error instanceof ErrorEvent) {
-            // Client-side error
+        
             errorMessage = `Error: ${error.error.message}`;
         } else {
-            // Server-side error
             errorMessage = `Server returned code ${error.status}: ${error.message}`;
         }
 

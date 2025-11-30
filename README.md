@@ -8,17 +8,17 @@ A polished Angular application that fetches posts from JSONPlaceholder API, disp
 
 ## Features
 
-✨ **Data Loading**: Fetches 100 posts from JSONPlaceholder API  
-📊 **SpreadJS Integration**: Full-featured spreadsheet with virtualization  
-✏️ **Inline Editing**: Edit cells directly in the spreadsheet  
-🎯 **Column Selection**: Choose which columns to include in save  
-💾 **Dual Save Options**: Save selected columns or all data  
-👁️ **Preview**: View JSON payload before saving  
-📥 **Export**: Download data as JSON file  
-🎨 **Modern UI**: Glassmorphism design with smooth animations  
-📱 **Responsive**: Works on desktop, tablet, and mobile  
-♿ **Accessible**: Keyboard navigation and ARIA support  
-🧪 **Tested**: Comprehensive unit tests
+**Data Loading**: Fetches 100 posts from JSONPlaceholder API  
+**SpreadJS Integration**: Full-featured spreadsheet with virtualization  
+**Inline Editing**: Edit cells directly in the spreadsheet  
+**Column Selection**: Choose which columns to include in save  
+**Dual Save Options**: Save selected columns or all data  
+**Preview**: View JSON payload before saving  
+**Export**: Download data as JSON file  
+**Modern UI**: Glassmorphism design with smooth animations  
+**Responsive**: Works on desktop, tablet, and mobile  
+**Accessible**: Keyboard navigation and ARIA support  
+**Tested**: Comprehensive unit tests
 
 ## Tech Stack
 
@@ -86,8 +86,8 @@ node server.js
 
 You should see:
 ```
-🚀 Mock backend server running on http://localhost:3000
-📡 Endpoints available:
+Mock backend server running on http://localhost:3000
+Endpoints available:
    - POST http://localhost:3000/api/save-columns
    - POST http://localhost:3000/api/save-all
    - GET  http://localhost:3000/api/health

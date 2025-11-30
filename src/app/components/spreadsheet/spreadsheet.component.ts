@@ -55,7 +55,7 @@ export class SpreadsheetComponent implements AfterViewInit, OnDestroy {
             return;
         }
 
-        // Initialize workbook
+
         this.workbook = new GC.Spread.Sheets.Workbook(this.spreadContainer.nativeElement, {
             sheetCount: 1
         });
@@ -63,35 +63,30 @@ export class SpreadsheetComponent implements AfterViewInit, OnDestroy {
         this.sheet = this.workbook.getActiveSheet();
         this.sheet.name('Posts Data');
 
-        // Configure sheet
+
         this.configureSheet();
 
-        // Load data if available
         if (this.posts.length > 0) {
             this.loadData();
         }
     }
 
     private configureSheet(): void {
-        // Set column headers and configure each column
         this.columns.forEach((col, index) => {
             this.sheet.setValue(0, index, col.displayName, GC.Spread.Sheets.SheetArea.colHeader);
 
-            // Set column width based on content
             if (col.name === 'userId') {
                 this.sheet.setColumnWidth(index, 80);
             } else if (col.name === 'id') {
                 this.sheet.setColumnWidth(index, 60);
             } else if (col.name === 'title') {
                 this.sheet.setColumnWidth(index, 400);
-                // Enable text wrapping for title column
                 const style = new GC.Spread.Sheets.Style();
                 style.wordWrap = true;
                 style.vAlign = GC.Spread.Sheets.VerticalAlign.top;
                 this.sheet.setStyle(-1, index, style);
             } else if (col.name === 'body') {
                 this.sheet.setColumnWidth(index, 500);
-                // Enable text wrapping for body column
                 const style = new GC.Spread.Sheets.Style();
                 style.wordWrap = true;
                 style.vAlign = GC.Spread.Sheets.VerticalAlign.top;
@@ -99,33 +94,30 @@ export class SpreadsheetComponent implements AfterViewInit, OnDestroy {
             }
         });
 
-        // Set default row height to accommodate wrapped text
+
         this.sheet.defaults.rowHeight = 60;
 
-        // Enable virtualization for performance with large datasets
         this.sheet.options.rowHeaderVisible = true;
         this.sheet.options.colHeaderVisible = true;
 
-        // Freeze the header row
+
         this.sheet.frozenRowCount(1);
 
-        // Allow editing
         this.sheet.options.isProtected = false;
 
-        // Enable automatic row height adjustment
         this.sheet.options.autoFitType = GC.Spread.Sheets.AutoFitType.cellWithHeader;
     }
 
     loadData(): void {
         if (!this.sheet || this.posts.length === 0) return;
 
-        // Clear existing data using the correct SpreadJS method
+      
         const rowCount = this.sheet.getRowCount();
         if (rowCount > 0) {
             this.sheet.clear(0, 0, rowCount, this.columns.length, GC.Spread.Sheets.SheetArea.viewport);
         }
 
-        // Set data source
+    
         const dataSource = this.posts.map(post => ({
             userId: post.userId,
             id: post.id,
@@ -133,10 +125,9 @@ export class SpreadsheetComponent implements AfterViewInit, OnDestroy {
             body: post.body
         }));
 
-        // Bind data to sheet
+
         this.sheet.setDataSource(dataSource);
 
-        // Apply column visibility
         this.applyColumnVisibility();
 
         this.dataLoaded.emit();
@@ -180,7 +171,6 @@ export class SpreadsheetComponent implements AfterViewInit, OnDestroy {
             this.columns.forEach((col, colIndex) => {
                 const value = this.sheet.getValue(i, colIndex);
 
-                // Check if we should include this column
                 const shouldInclude = selectedColumns
                     ? selectedColumns.includes(col.name)
                     : true;
@@ -191,7 +181,7 @@ export class SpreadsheetComponent implements AfterViewInit, OnDestroy {
                 }
             });
 
-            // Only add rows that have data
+            
             if (hasData) {
                 rows.push(rowData);
             }
@@ -210,7 +200,7 @@ export class SpreadsheetComponent implements AfterViewInit, OnDestroy {
             const title = this.sheet.getValue(i, 2);
             const body = this.sheet.getValue(i, 3);
 
-            // Only add rows that have data
+  
             if (id !== null && id !== undefined) {
                 rows.push({ userId, id, title, body });
             }

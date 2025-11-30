@@ -62,11 +62,10 @@ describe('PostsService', () => {
             expect(posts).toEqual(mockPosts);
         });
 
-        // First request fails
         const req1 = httpMock.expectOne('https://jsonplaceholder.typicode.com/posts');
         req1.flush('Error', { status: 500, statusText: 'Server Error' });
 
-        // Second request (retry) succeeds
+       
         const req2 = httpMock.expectOne('https://jsonplaceholder.typicode.com/posts');
         req2.flush(mockPosts);
     });

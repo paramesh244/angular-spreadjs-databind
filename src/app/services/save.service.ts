@@ -31,14 +31,12 @@ export class SaveService {
         let errorMessage = 'An error occurred while saving data.';
 
         if (error.error instanceof ErrorEvent) {
-            // Client-side error
             errorMessage = `Error: ${error.error.message}`;
         } else if (error.name && error.name === 'TimeoutError') {
             errorMessage = 'Request timed out. Please try again.';
         } else if (error.status === 0) {
             errorMessage = 'Cannot connect to server. Please ensure the backend is running.';
         } else {
-            // Server-side error
             errorMessage = `Server returned code ${error.status}: ${error.message}`;
         }
 

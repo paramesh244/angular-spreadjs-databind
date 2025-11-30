@@ -160,7 +160,7 @@ export class AppComponent implements OnInit {
 
     this.previewPayload = {
       selectedColumns: selectedCols,
-      rows: rows.slice(0, 5) // Preview first 5 rows
+      rows: rows.slice(0, 5) 
     };
 
     this.previewModalOpen = true;
@@ -203,7 +203,6 @@ export class AppComponent implements OnInit {
 
     this.toasts.push(toast);
 
-    // Auto-remove after 5 seconds
     setTimeout(() => {
       const index = this.toasts.findIndex(t => t.id === toast.id);
       if (index !== -1) {
