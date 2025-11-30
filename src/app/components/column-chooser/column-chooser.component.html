@@ -1,0 +1,48 @@
+<div *ngIf="isOpen" class="column-chooser-backdrop" (click)="handleBackdropClick($event)"
+    (keydown)="handleKeyDown($event)" tabindex="-1">
+    <div class="column-chooser-panel" role="dialog" aria-labelledby="chooser-title">
+        <div class="panel-header">
+            <h3 id="chooser-title">Select Columns</h3>
+            <button class="close-button" (click)="closePanel()" aria-label="Close column chooser">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div class="panel-content">
+            <div class="select-all-section">
+                <label class="checkbox-label">
+                    <input type="checkbox" [checked]="allSelected" (change)="toggleAll()" class="checkbox-input" />
+                    <span class="checkbox-custom"></span>
+                    <span class="checkbox-text">Select All ({{ selectedCount }}/{{ columns.length }})</span>
+                </label>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="columns-list">
+                <label *ngFor="let column of columns" class="checkbox-label" [class.checked]="column.visible">
+                    <input type="checkbox" [(ngModel)]="column.visible" (change)="toggleColumn(column)"
+                        class="checkbox-input" />
+                    <span class="checkbox-custom"></span>
+                    <span class="checkbox-text">{{ column.displayName }}</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="panel-footer">
+            <p class="hint-text">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                Selected columns will be included in the save
+            </p>
+        </div>
+    </div>
+</div>
